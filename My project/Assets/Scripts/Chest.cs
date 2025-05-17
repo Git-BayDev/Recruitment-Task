@@ -10,24 +10,32 @@ public class Chest : MonoBehaviour
     public Animator animator;
 
     public ChestSpawn ChestSpawn;
+    private UIController controller;
+    public bool isOpened = false;
 
     private void Start()
     {
         ChestSpawn = GameObject.FindGameObjectWithTag("Spawner").GetComponent<ChestSpawn>();
-
+        controller = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<UIController>();
 
         orgMaterial = render.material;
         newMaterial = new Material(orgMaterial);
         newMaterial.color = orgMaterial.color * 2;
     }
 
-    private async Task OnMouseDown()
+    private void OnMouseDown()
     {
-        print("Klik");
-        animator.SetBool("IsOpened",true);
-        ChestSpawn.spawnChest();
-        await Task.Delay(1000);
-        Destroy(gameObject);
+        if (!isOpened) {
+            controller.openUI.SetActive(true);
+        }
+        if(isOpened)
+        {
+            controller.takeUI.SetActive(true);
+        }
+     //   animator.SetBool("IsOpened",true);
+     //   ChestSpawn.spawnChest();
+      //  await Task.Delay(1000);
+     //   Destroy(gameObject);
     }
 
     private void OnMouseEnter()

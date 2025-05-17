@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float currTime = 0;
+    public float currTime = 0;
     public TextMeshProUGUI timerText;
     public Camera cam;
 
