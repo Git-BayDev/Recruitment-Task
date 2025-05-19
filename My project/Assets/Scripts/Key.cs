@@ -23,11 +23,17 @@ public class Key : MonoBehaviour
                 missingKey.enabled = true;
                 key.enabled = false;
             }
-            else 
+            else
             {
                 key.enabled = true;
                 missingKey.enabled = false;
             }
+        }
+        else 
+        {
+            missingKey.enabled = false;
+            key.enabled = false;
+
         }
     }
 

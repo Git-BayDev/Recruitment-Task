@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if(cam.enabled == true)
+        if (cam.enabled == true)
         {
             timerText.enabled = true;
             currTime += Time.deltaTime;
@@ -29,6 +29,10 @@ public class Timer : MonoBehaviour
             string time = string.Format("{0:00}:{1:00}:{2:00}", min, sec, msec);
 
             timerText.text = time;
+        }
+        else 
+        {
+            timerText.enabled = false;
         }
 
     }

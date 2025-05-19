@@ -25,13 +25,18 @@ public class Door : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!keyRef.hasKey)
+        if (controller.canClick)
         {
-            controller.doorClosedUI.SetActive(true);
-        }
-        else 
-        {
-            controller.openDoorUI.SetActive(true);
+            if (!keyRef.hasKey)
+            {
+                controller.doorClosedUI.SetActive(true);
+                controller.canClick = false;
+            }
+            else
+            {
+                controller.openDoorUI.SetActive(true);
+                controller.canClick = false;
+            }
         }
         
     }
