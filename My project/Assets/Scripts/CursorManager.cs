@@ -7,7 +7,7 @@ public class CursorManager : MonoBehaviour
     private Vector2 clickPosition;
     void Start()
     {
-        clickPosition = new Vector2(normalCursor.width / 2, normalCursor.height / 4);
+        clickPosition = new Vector2(normalCursor.width / 2 - 7, normalCursor.height / 5);
         Cursor.SetCursor(normalCursor,clickPosition,CursorMode.Auto);
     }
 
