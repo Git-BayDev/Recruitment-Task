@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,12 +11,17 @@ public class MainMenu : MonoBehaviour
     public Camera mainMenuCam;
     public Camera gameCam;
     public Timer timer;
+
     private float bestTime = 1000f;
     private float lastTime;
+
     public TextMeshProUGUI score;
     public TextMeshProUGUI lastScore;
-    [SerializeField] private UIController ui;
     public int gameLoop = 0;
+
+    [SerializeField] private UIController ui;
+
+    public Animator animator;
     private void Start()
     {
         
@@ -34,6 +40,7 @@ public class MainMenu : MonoBehaviour
             lastScore.enabled = false;
         }
         updateScore();
+        ui.makeButtonsInteractable(gameObject);
     }
 
     public void updateScore() 
@@ -61,18 +68,27 @@ public class MainMenu : MonoBehaviour
 
     public void startGame() 
     {
-        mainMenuCam.enabled = false;
-        gameCam.enabled = true;
         timer.currTime = 0;
         if (gameLoop != 0)
         {
             Spawner.spawn(chest);
             Spawner.spawn(door);
-            ui.findObjects();
+            
         }
+        StartCoroutine(MakeTransition());
         
     }
 
+
+    IEnumerator MakeTransition() 
+    {
+        animator.SetTrigger("Transition");
+        yield return new WaitForSeconds(0.3f);
+        gameObject.SetActive(false);
+        mainMenuCam.enabled = false;
+        animator.SetTrigger("BackTransition");
+        gameCam.enabled = true;
+    }
 
     public void quitGame()
     { 

@@ -193,7 +193,7 @@ MonoBehaviour:
   render: {fileID: 7938406547571833939}
   lidRender: {fileID: 2258101794886828606}
   animator: {fileID: 2967601985906978900}
-  ChestSpawn: {fileID: 0}
+  isOpened: 0
 --- !u!65 &7836569767330320163
 BoxCollider:
   m_ObjectHideFlags: 0

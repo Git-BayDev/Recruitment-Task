@@ -10,12 +10,12 @@ public class Chest : MonoBehaviour
     public Animator animator;
     private UIController controller;
     public bool isOpened = false;
-
+    private AudioManager audioManager;
     private void Start()
     {
- 
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         controller = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<UIController>();
-
+        controller.setChestRefference(this);
         orgMaterial = render.material;
         newMaterial = new Material(orgMaterial);
         newMaterial.color = orgMaterial.color * 2;
@@ -25,6 +25,7 @@ public class Chest : MonoBehaviour
     {
         if (controller.canClick)
         {
+        audioManager.playSFX(audioManager.popUI);
             if (!isOpened)
             {
                 controller.openUI.SetActive(true);

@@ -11,11 +11,13 @@ public class Door : MonoBehaviour
     private Material newMaterial;
     private UIController controller;
     private Key keyRef;
-
+    private AudioManager audioManager;
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         keyRef = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<Key>();
         controller = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<UIController>();
+        controller.setDoorRefference(this);
         orgMaterial = wallRender.material;
         newMaterial = new Material(orgMaterial);
         newMaterial.color = orgMaterial.color * 2f;
@@ -27,6 +29,7 @@ public class Door : MonoBehaviour
     {
         if (controller.canClick)
         {
+        audioManager.playSFX(audioManager.popUI);
             if (!keyRef.hasKey)
             {
                 controller.doorClosedUI.SetActive(true);
@@ -38,7 +41,6 @@ public class Door : MonoBehaviour
                 controller.canClick = false;
             }
         }
-        
     }
 
     private void OnMouseEnter()
