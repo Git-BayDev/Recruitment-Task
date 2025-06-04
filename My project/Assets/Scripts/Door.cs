@@ -14,9 +14,9 @@ public class Door : MonoBehaviour
     private AudioManager audioManager;
     private void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        keyRef = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<Key>();
-        controller = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<UIController>();
+        audioManager = AudioManager.Instance;
+        keyRef = Key.Instance;
+        controller = UIController.Instance;
         controller.setDoorRefference(this);
         orgMaterial = wallRender.material;
         newMaterial = new Material(orgMaterial);

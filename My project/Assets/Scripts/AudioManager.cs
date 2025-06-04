@@ -12,7 +12,18 @@ public class AudioManager : MonoBehaviour
     public AudioClip popUI;
     public AudioClip keySound;
 
+    public static AudioManager Instance { get; private set;}
 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) 
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {

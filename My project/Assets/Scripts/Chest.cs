@@ -13,8 +13,8 @@ public class Chest : MonoBehaviour
     private AudioManager audioManager;
     private void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        controller = GameObject.FindGameObjectWithTag("DisplayUI").GetComponent<UIController>();
+        audioManager = AudioManager.Instance;
+        controller = UIController.Instance;
         controller.setChestRefference(this);
         orgMaterial = render.material;
         newMaterial = new Material(orgMaterial);

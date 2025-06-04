@@ -19,13 +19,28 @@ public class UIController : MonoBehaviour
     private Door door;
     private Vector3 camPosition;
     private Quaternion camRotation;
-
+    
+    [SerializeField] private ChestSpawn spawner;
     [SerializeField] private MainMenu mainMenu;
     [SerializeField] private Camera mainMenuCam;
     [SerializeField] private Camera gameCam;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private AudioManager audioManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+
+    public static UIController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
     void Start()
     {
         camPosition = gameCam.transform.position;
@@ -41,10 +56,11 @@ public class UIController : MonoBehaviour
 
 
 
-    public void setChestRefference(Chest chestRef) 
+    public void setChestRefference(Chest chestRef)
     {
         chest = chestRef;
-    } public void setDoorRefference(Door doorRef) 
+    }
+    public void setDoorRefference(Door doorRef)
     {
         door = doorRef;
     }
@@ -63,24 +79,32 @@ public class UIController : MonoBehaviour
         keyRef.hasKey = false;
         openDoorUI.SetActive(false);
         Destroy(door.gameObject);
-        lastTime = timer.currTime;
-        mainMenu.gameLoop += 1;
         canClick = true;
-        
+
 
 
         // Reset gameloop
-        mainMenuCam.enabled = true;
-        gameCam.enabled = false;
-        gameCam.transform.position = camPosition;
-        gameCam.transform.rotation = camRotation;
-        mainMenu.gameObject.SetActive(true);
+        if (keyRef.howManyKeysFound == keyRef.howManyKeys)
+        {
+            keyRef.howManyKeysFound = 0;
+            mainMenu.gameLoop += 1;
+            lastTime = timer.currTime;
+            mainMenuCam.enabled = true;
+            gameCam.enabled = false;
+            gameCam.transform.position = camPosition;
+            gameCam.transform.rotation = camRotation;
+            mainMenu.gameObject.SetActive(true);
+        }
+        else {
+            spawner.spawn(spawner.chest);
+            spawner.spawn(spawner.door);
+        }
         
     }
 
    public void openChest() 
-    { 
-        chest.animator.SetBool("IsOpened", true);
+    {
+        chest.animator.SetTrigger("IsOpen");
         openUI.SetActive(false);
         chest.isOpened = true;
         canClick = true;
@@ -92,11 +116,11 @@ public class UIController : MonoBehaviour
     {
         takeUI.SetActive(false);
         chest.isOpened = false;
+        keyRef.howManyKeysFound++;
         keyRef.hasKey = true;
         audioManager.playSFX(audioManager.keySound);
         Destroy(chest.gameObject);
         canClick = true;
-        chest.isOpened = false;
     }
 
     public void pressNo()

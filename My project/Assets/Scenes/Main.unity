@@ -2339,10 +2339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98674427405c75949832583057f36107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  howManyKeys: 3
   hasKey: 0
   missingKey: {fileID: 1027453780}
   key: {fileID: 167621220}
   cam: {fileID: 1009706803}
+  howManyKeysFound: 0
 --- !u!114 &157753945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2363,6 +2365,9 @@ MonoBehaviour:
   keyRef: {fileID: 157753944}
   canClick: 1
   lastTime: 0
+  chest: {fileID: 809152745418936134, guid: 60dcf3858fa6f6b42af199ae0609883e, type: 3}
+  door: {fileID: 7734338371465019503, guid: 3230a2c56f22cfa4fa285a5300278b47, type: 3}
+  spawner: {fileID: 468989823}
   mainMenu: {fileID: 247557375}
   mainMenuCam: {fileID: 727588}
   gameCam: {fileID: 1009706803}
