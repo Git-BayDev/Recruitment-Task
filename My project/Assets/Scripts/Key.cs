@@ -28,8 +28,7 @@ public class Key : MonoBehaviour
         key.enabled = false;
     }
 
-
-    private void Update()
+    public void keyImageDisplay()
     {
         if (cam.enabled == true)
         {
@@ -44,14 +43,13 @@ public class Key : MonoBehaviour
                 missingKey.enabled = false;
             }
         }
-        else 
+        else
         {
             missingKey.enabled = false;
             key.enabled = false;
 
         }
+
     }
-
-
 
 }

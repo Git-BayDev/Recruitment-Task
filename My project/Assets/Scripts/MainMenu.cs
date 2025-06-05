@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
@@ -11,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public Camera mainMenuCam;
     public Camera gameCam;
     public Timer timer;
+    public Key keyRef;
 
     private float bestTime = 1000f;
     private float lastTime;
@@ -22,27 +22,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private UIController ui;
 
     public Animator animator;
+
+
     private void Start()
     {
-        
+        score.enabled = false;
+        lastScore.enabled = false;
     }
-
-    private void Update()
-    {
-        if (gameLoop != 0)
-        {
-            score.enabled = true;
-            lastScore.enabled = true;
-        }
-        else 
-        {
-            score.enabled = false;
-            lastScore.enabled = false;
-        }
-        updateScore();
-        ui.makeButtonsInteractable(gameObject);
-    }
-
     public void updateScore() 
     {
         if (gameLoop != 0)
@@ -88,6 +74,7 @@ public class MainMenu : MonoBehaviour
         mainMenuCam.enabled = false;
         animator.SetTrigger("BackTransition");
         gameCam.enabled = true;
+        keyRef.keyImageDisplay();
     }
 
     public void quitGame()

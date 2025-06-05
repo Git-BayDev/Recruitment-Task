@@ -190,8 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1393cd0f7843a4b4d9e24894a7ce8f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 7938406547571833939}
-  lidRender: {fileID: 2258101794886828606}
+  renderers:
+  - {fileID: 7938406547571833939}
+  - {fileID: 2258101794886828606}
   animator: {fileID: 2967601985906978900}
   isOpened: 0
 --- !u!65 &7836569767330320163

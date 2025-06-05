@@ -84,8 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6ae4947ca20e745b393ea5b352af59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRender: {fileID: 4403629180695277487}
-  doorRender: {fileID: 8290607942577767762}
+  renderers:
+  - {fileID: 4403629180695277487}
+  - {fileID: 8290607942577767762}
+  highLightMaterial: {fileID: 2100000, guid: 7a1f528557e1c124b86e5c1016932a8b, type: 2}
+  orgMaterial: {fileID: 6892232844440235036, guid: 260dd1289f05cce499fccfee9fc64a93, type: 3}
 --- !u!65 &4901686858415552082
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -54,8 +54,6 @@ public class UIController : MonoBehaviour
     }
 
 
-
-
     public void setChestRefference(Chest chestRef)
     {
         chest = chestRef;
@@ -65,22 +63,13 @@ public class UIController : MonoBehaviour
         door = doorRef;
     }
 
-
-    private void Update()
-    {
-        makeButtonsInteractable(takeUI);
-        makeButtonsInteractable(openUI);
-        makeButtonsInteractable(openDoorUI);
-        makeButtonsInteractable(doorClosedUI);
-    }
-
     public void openDoor()
     {
         keyRef.hasKey = false;
         openDoorUI.SetActive(false);
         Destroy(door.gameObject);
         canClick = true;
-
+        keyRef.keyImageDisplay();
 
 
         // Reset gameloop
@@ -94,6 +83,10 @@ public class UIController : MonoBehaviour
             gameCam.transform.position = camPosition;
             gameCam.transform.rotation = camRotation;
             mainMenu.gameObject.SetActive(true);
+            makeButtonsInteractable(mainMenu.gameObject);
+            mainMenu.updateScore();
+            mainMenu.score.enabled = true;
+            mainMenu.lastScore.enabled = true;
         }
         else {
             spawner.spawn(spawner.chest);
@@ -106,6 +99,7 @@ public class UIController : MonoBehaviour
     {
         chest.animator.SetTrigger("IsOpen");
         openUI.SetActive(false);
+        makeButtonsInteractable(openUI);
         chest.isOpened = true;
         canClick = true;
         audioManager.playSFX(audioManager.chestOpening);
@@ -115,9 +109,11 @@ public class UIController : MonoBehaviour
     public void takeKey() 
     {
         takeUI.SetActive(false);
+        makeButtonsInteractable(takeUI);
         chest.isOpened = false;
         keyRef.howManyKeysFound++;
         keyRef.hasKey = true;
+        keyRef.keyImageDisplay();
         audioManager.playSFX(audioManager.keySound);
         Destroy(chest.gameObject);
         canClick = true;
@@ -130,6 +126,12 @@ public class UIController : MonoBehaviour
         doorClosedUI.SetActive(false);
         openDoorUI.SetActive(false);
         canClick = true;
+
+       // Dezaktywuj wszystkie przyciski
+        makeButtonsInteractable(takeUI);
+        makeButtonsInteractable(openUI);
+        makeButtonsInteractable(openDoorUI);
+        makeButtonsInteractable(doorClosedUI);
     }
 
     public void makeButtonsInteractable(GameObject button) 

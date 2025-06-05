@@ -10,12 +10,6 @@ public class ChestSpawn : MonoBehaviour
         spawn(door);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void spawn(GameObject spawnObject) 
     {

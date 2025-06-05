@@ -2,13 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public class Door : MonoBehaviour
+public class Door : Interact
 {
-    public Renderer wallRender;
-    public Renderer doorRender;
-
-    private Material orgMaterial;
-    private Material newMaterial;
     private UIController controller;
     private Key keyRef;
     private AudioManager audioManager;
@@ -18,9 +13,6 @@ public class Door : MonoBehaviour
         keyRef = Key.Instance;
         controller = UIController.Instance;
         controller.setDoorRefference(this);
-        orgMaterial = wallRender.material;
-        newMaterial = new Material(orgMaterial);
-        newMaterial.color = orgMaterial.color * 2f;
     }
 
 
@@ -33,25 +25,16 @@ public class Door : MonoBehaviour
             if (!keyRef.hasKey)
             {
                 controller.doorClosedUI.SetActive(true);
+                controller.makeButtonsInteractable(controller.doorClosedUI);
                 controller.canClick = false;
             }
             else
             {
                 controller.openDoorUI.SetActive(true);
+                controller.makeButtonsInteractable(controller.openDoorUI);
                 controller.canClick = false;
             }
         }
     }
 
-    private void OnMouseEnter()
-    {
-        wallRender.material = newMaterial;
-        doorRender.material = newMaterial;
-    }
-
-    private void OnMouseExit()
-    {
-        wallRender.material = orgMaterial;
-        doorRender.material = orgMaterial;
-    }
 }
